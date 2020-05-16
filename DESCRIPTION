@@ -16,9 +16,10 @@ Description: Finance routines developed at IGIDR Finance Research Group.
 URL: http://ifrogs.r-forge.r-project.org
 BugReports: https://r-forge.r-project.org/tracker/?group_id=xxx
 License: GPL (>= 2)
-Date: 2013-10-31
+Date: 2021-10-31
 Type: Package
 ByteCompile: TRUE
 LazyLoad: TRUE
 BuildVignettes: TRUE
 RoxygenNote: 6.0.1.9000
+
