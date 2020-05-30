@@ -24,9 +24,10 @@ library(urca)
 
 
 pdshare <- function(x, override.lags = NULL, lag.max = 10) {
-  stopifnot(ncol(x)==2)
+  stopifnot(ncol(x)==3)
   stopifnot(is.numeric(x[,1]))
   stopifnot(is.numeric(x[,2]))
+  stopifnot(is.numeric(x[,3]))  
   if (is.null(override.lags)){
     if(lag.max<2) stop("Minimum lags should be 2")
   } else {
@@ -51,8 +52,8 @@ pdshare <- function(x, override.lags = NULL, lag.max = 10) {
     ## (beta.orthogonal))] * transpose(alpha.orthogonal)
 
     ## the beta_orthogonal and alpha_orthogonal vectors :
-   beta.ort <- as.vector(c(-cointest@V[2,1], cointest@V[1,1]))
-   alpha.ort <- as.vector(c(-cointest@W[2,1], cointest@W[1,1]))
+   beta.ort <- as.vector(c(-cointest@V[3,1], cointest@V[1,1]))
+   alpha.ort <- as.vector(c(-cointest@W[3,1], cointest@W[1,1]))
 
     ## initializing the parameters of gamma matrix
     aa <- bb <- cc <- dd <- 0
