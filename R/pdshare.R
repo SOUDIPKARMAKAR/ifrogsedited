@@ -63,7 +63,7 @@ pdshare <- function(x, override.lags = NULL, lag.max = 10) {
       cc <- cc + vecm$rlm$coefficients[2*i,2]
       dd <- dd + vecm$rlm$coefficients[2*i+1,2]
     }
-    gamma.1 <- matrix(c(1-aa, -bb, -cc, 1-dd), nrow = 2, ncol = 2, byrow
+    gamma.1 <- matrix(c(1-aa, -bb, -cc, 1-dd), nrow = 3, ncol = 3, byrow
     = TRUE) 
 
     b <- as.numeric(t(alpha.ort) %*% gamma.1 %*% beta.ort)
@@ -79,7 +79,7 @@ pdshare <- function(x, override.lags = NULL, lag.max = 10) {
     n <- psi %*% f
     d <- psi %*% omega %*% t(psi)
 
-    list(ishares = c((n[, 1]^2)/d, (n[, 2]^2)/d), alpha.ort = alpha.ort, 
+    list(ishares = c((n[, 1]^2)/d, (n[, 2]^2)/d), (n[, 3]^2)/d), alpha.ort = alpha.ort, 
          omega = omega, lags = varm$p)
   }
 
@@ -98,13 +98,13 @@ pdshare <- function(x, override.lags = NULL, lag.max = 10) {
   lags.used <- tmp$lags
 
   # Do the reverse ordering
-  tmp <- pdshare.computation(x[,c(2,1)], nlag)
+  tmp <- pdshare.computation(x[,c(3,1)], nlag)
   is.reversed.ordering <- as.data.frame(tmp$ishares)
 
   
   rownames(var.covar.matrix) <- colnames(var.covar.matrix) <-
     rownames(component.share) <- rownames(is.original.ordering) <- cnames
-  rownames(is.reversed.ordering) <- c(cnames[2], cnames[1])
+  rownames(is.reversed.ordering) <- c(cnames[3],cnames[2], cnames[1])
   colnames(is.original.ordering) <- colnames(is.reversed.ordering) <-
     "IS" 
   colnames(component.share) <- "CS"
