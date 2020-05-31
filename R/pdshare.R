@@ -56,14 +56,19 @@ pdshare <- function(x, override.lags = NULL, lag.max = 10) {
    alpha.ort <- as.vector(c(-cointest@W[3,1], cointest@W[1,1]))
 
     ## initializing the parameters of gamma matrix
-    aa <- bb <- cc <- dd <- 0
-    for (i in 1:(k-1)) {
+    aa <- bb <- cc <- dd <- ee <- gg <- ff <- gg <- hh <- ii <- 0
+    for (i in 1:(k-2)) {
       aa <- aa + vecm$rlm$coefficients[2*i,1]
-      bb <- bb + vecm$rlm$coefficients[2*i+1,1]
-      cc <- cc + vecm$rlm$coefficients[2*i,2]
-      dd <- dd + vecm$rlm$coefficients[2*i+1,2]
+      bb <- bb + vecm$rlm$coefficients[2*i+1,1]  
+      cc <- cc + vecm$rlm$coefficients[2*i+2,1]
+      dd <- dd + vecm$rlm$coefficients[2*i,2]
+      ee <- ee + vecm$rlm$coefficients[2*i+1,2] 
+      ff <- ff + vecm$rlm$coefficients[2*i+2,2]
+      gg <- gg + vecm$rlm$coefficients[2*i,3]
+      hh <- hh + vecm$rlm$coefficients[2*i+1,3]
+      ii <- ii + vecm$rlm$coefficients[2*i+2,3] 
     }
-    gamma.1 <- matrix(c(1-aa, -bb, -cc, 1-dd), nrow = 3, ncol = 3, byrow
+    gamma.1 <- matrix(c(1-aa, -bb, cc, -dd, 1-ee, -ff, gg, -hh, 1-ii), nrow = 3, ncol = 3, byrow
     = TRUE) 
 
     b <- as.numeric(t(alpha.ort) %*% gamma.1 %*% beta.ort)
